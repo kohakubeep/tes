@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>Warung Bunda Sri</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    *{margin:0;padding:0;box-sizing:border-box}
+    body{font-family:'Inter',sans-serif;background:#f5f7fa;color:#333}
+
+    /* NAVBAR */
+    .navbar{
+      display:flex;justify-content:space-between;align-items:center;
+      padding:14px 32px;background:#ffffff;
+      box-shadow:0 2px 8px rgba(0,0,0,.08);
+      flex-wrap:wrap;
+      gap:15px;
+    }
+    .logo{font-weight:700;color:#ff5722;font-size:20px}
+    .nav-link{list-style:none;display:flex;gap:20px;align-items:center}
+    .nav-link a{text-decoration:none;color:#555;font-weight:500;transition:color .3s}
+    .nav-link a:hover{color:#ff5722}
+    
+    .user-section{
+      display:flex;
+      align-items:center;
+      gap:12px;
+    }
+    
+    .user-info{
+      background:#f5f7fa;
+      padding:6px 14px;
+      border-radius:8px;
+      font-size:14px;
+      font-weight:500;
+      color:#555;
+    }
+    
+    .btn-logout{
+      background:#ff5722;
+      color:#fff;
+      padding:8px 16px;
+      border:none;
+      border-radius:8px;
+      font-weight:600;
+      font-size:14px;
+      cursor:pointer;
+      transition:background .3s;
+    }
+    
+    .btn-logout:hover{
+      background:#e64a19;
+    }
+
+    /* HERO */
+    .hero{
+      padding:60px 20px;text-align:center;background:#ffffff;margin-bottom:40px
+    }
+    .hero h1{font-size:36px;font-weight:700;margin-bottom:10px}
+    .hero p{color:#666;margin-bottom:25px}
+    .btn-primary{
+      background:#ff5722;color:#fff;padding:10px 28px;border-radius:8px;
+      text-decoration:none;font-weight:600;display:inline-block;
+      transition:background .3s;
+    }
+    .btn-primary:hover{background:#e64a19}
+
+    /* KATEGORI */
+    .kategori{padding:0 8%}
+    .kategori h2{text-align:center;font-size:26px;margin-bottom:30px}
+    .kategori-box{
+      display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:20px
+    }
+    .kategori-card{
+      background:#ffffff;border-radius:12px;padding:18px;
+      display:flex;align-items:center;gap:15px;
+      box-shadow:0 4px 12px rgba(0,0,0,.08);
+      transition:transform .2s;
+      cursor:pointer;
+    }
+    .kategori-card:hover{transform:translateY(-4px)}
+    .kategori-card img{
+      width:70px;height:70px;border-radius:10px;object-fit:cover
+    }
+    .kategori-card h3{font-size:18px;margin-bottom:4px}
+    .kategori-card p{font-size:13px;color:#666;margin-bottom:8px}
+    .btn-secondary{
+      font-size:13px;color:#ff5722;text-decoration:none;font-weight:600
+    }
+
+    footer{
+      margin-top:60px;padding:18px;text-align:center;
+      background:#212529;color:#fff;font-size:13px
+    }
+
+    @media(max-width:768px){
+      .navbar{
+        padding:14px 20px;
+      }
+      .nav-link{
+        flex-wrap:wrap;
+        justify-content:center;
+      }
+      .user-section{
+        width:100%;
+        justify-content:center;
+      }
+      .hero h1{font-size:28px}
+    }
+  </style>
+
+</head>
+<body>
+
+<nav class="navbar">
+  <div class="logo">🍽️ Warung Bunda Sri</div>
+  
+  <ul class="nav-link">
+    <li><a href="MENU MAKANAN.html">Makanan</a></li>
+    <li><a href="MENU MINUMAN.html">Minuman</a></li>
+    <li><a href="KERANJANG PESANAN.html">Keranjang</a></li>
+  </ul>
+  
+  <div class="user-section">
+    <div class="user-info" id="userName">👤 User</div>
+    <button class="btn-logout" onclick="logout()">Keluar</button>
+  </div>
+</nav>
+
+<section class="hero">
+  <h1>Selamat Datang </h1>
+  <p>Silahkan Pilih Apa Yang Ingin Dicari?</p>
+  <a href="#kategori" class="btn-primary">Mulai Pesan</a>
+</section>
+
+<section id="kategori" class="kategori">
+  <h2>Kategori Menu</h2>
+
+  <div class="kategori-box">
+
+    <div class="kategori-card" onclick="location.href='MENU MAKANAN.html'">
+      <img src="download.jpg" alt="Makanan">
+      <div>
+        <h3>Makanan</h3>
+        <p>Nasi, lauk, Aneka Jajan</p>
+        <a href="MENU MAKANAN.html" class="btn-secondary">Lihat Menu →</a>
+      </div>
+    </div>
+
+    <div class="kategori-card" onclick="location.href='MENU MINUMAN.html'">
+      <img src="download.png" alt="Minuman">
+      <div>
+        <h3>Minuman</h3>
+        <p>Minuman segar & hangat</p>
+        <a href="MENU MINUMAN.html" class="btn-secondary">Lihat Menu →</a>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<footer>
+  © 2025 Warung Bunda Sri 
+</footer>
+
+<script>
+// Check login status
+window.addEventListener('DOMContentLoaded', () => {
+  const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+  
+  if(!currentUser){
+    // Redirect to login if not logged in
+    window.location.href = 'LOGIN.html';
+    return;
+  }
+  
+  // Display user name
+  const userName = document.getElementById('userName');
+  if(currentUser.status === 'guest'){
+    userName.textContent = '👤 Tamu';
+  } else {
+    userName.textContent = '👤 ' + currentUser.nama;
+  }
+});
+
+function logout(){
+  if(confirm('Apakah Anda yakin ingin keluar?')){
+    // Remove current user
+    localStorage.removeItem('currentUser');
+    
+    // Redirect to login
+    window.location.href = 'LOGIN.html';
+  }
+}
+</script>
+
+</body>
+</html>
